@@ -25,7 +25,8 @@ docker-compose up -d
 ## Что сделано
 
 - `docker-compose.yml` — сервисы `nginx`, `certbot` (сборка из `./certbot`) и `certbot_init` для первичного запроса.
--- `nginx/conf.d/example.com.conf` — пример конфига с ACME-challenge и проксированием (настроен для `hukakhepak.ru`).
+- `docker-compose.yml` — сервисы `nginx`, `certbot` (сборка из `./certbot`) и `certbot_init` для первичного запроса.
+- `nginx/conf.d/hukakhepak.conf` — пример конфига с ACME-challenge и проксированием (настроен для `hukakhepak.ru`).
 - `certbot/Dockerfile` и `certbot/renew-cron.sh` — образ с cron, который проверяет `certbot renew` ежедневно (03:00).
 
 ## Настройки и рекомендации

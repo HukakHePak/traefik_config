@@ -10,23 +10,21 @@ services:
       - ./certbot/www:/var/www/certbot
       - ./certbot/conf:/etc/letsencrypt
     restart: unless-stopped
+    networks:
+      - web
 
   certbot:
-    build:
-      context: ./certbot
-    image: certbot-cron:latest
-    volumes:
-      - ./certbot/www:/var/www/certbot
-      - ./certbot/conf:/etc/letsencrypt
-    restart: unless-stopped
-
-  certbot_init:
     image: certbot/certbot
     volumes:
       - ./certbot/www:/var/www/certbot
       - ./certbot/conf:/etc/letsencrypt
-    # Первичный запрос сертификата для hukakhepak.ru и www.hukakhepak.ru (с email)
-    command: >
-      certonly --webroot --webroot-path=/var/www/certbot \
-      --email nikak_ne_rak@mail.ru --agree-tos --no-eff-email \
-      -d hukakhepak.ru -d www.hukakhepak.ru
+    entrypoint: ''
+    # Автообновление сертификатов раз в 24 часа
+    command: /bin/sh -c "trap exit TERM; while :; do sleep 24h & wait $${!}; certbot renew --webroot -w /var/www/certbot --deploy-hook 'nginx -s reload'; done"
+    restart: unless-stopped
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge

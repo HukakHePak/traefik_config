@@ -1,2 +1,1 @@
-# Ignore ACME/Letsencrypt storage (contains private keys)
 traefik/letsencrypt/

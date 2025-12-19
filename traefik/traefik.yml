@@ -1,5 +1,8 @@
 log:
-  level: INFO
+  level: DEBUG
+  format: common
+
+accessLog: {}
 
 entryPoints:
   web:

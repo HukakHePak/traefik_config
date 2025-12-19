@@ -1,29 +1,19 @@
 log:
-  level: DEBUG
-  format: common
-
-accessLog: {}
+  level: INFO
 
 entryPoints:
   web:
     address: :80
   websecure:
     address: :443
-  traefik:
-    address: :8080
 
 providers:
   docker:
     exposedByDefault: false
-
-api:
-  dashboard: true
-  insecure: true
 
 certificatesResolvers:
   myresolver:
     acme:
       email: nikak_ne_rak@mail.ru
       storage: /letsencrypt/acme.json
-      httpChallenge:
-        entryPoint: web
+      tlsChallenge: {}

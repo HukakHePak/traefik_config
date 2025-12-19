@@ -1,0 +1,21 @@
+http:
+  routers:
+    oxo-router:
+      rule: "Host(`oxo.hukakhepak.ru`)"
+      entryPoints:
+        - websecure
+      service: oxo-service
+      tls:
+        certResolver: myresolver
+
+  services:
+    oxo-service:
+      loadBalancer:
+        # Replace the URL below with the actual backend where your app runs
+        servers:
+          - url: "http://127.0.0.1:8000"
+
+# Notes:
+# - Change the server URL to the reachable address/port of your app (container name
+#   if on the same docker network, or host:port if running externally).
+# - Save additional routers/services here to manage routing centrally via this repo.

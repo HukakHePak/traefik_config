@@ -16,4 +16,5 @@ certificatesResolvers:
     acme:
       email: nikak_ne_rak@mail.ru
       storage: /letsencrypt/acme.json
-      tlsChallenge: {}
+      httpChallenge:
+        entryPoint: web
